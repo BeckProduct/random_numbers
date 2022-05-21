@@ -1,5 +1,8 @@
-import 'package:numbers/numbers.dart' as numbers;
+import 'package:numbers/numbers.dart';
 
 void main(List<String> arguments) {
-  print(numbers.generate());
+  var numbers = Numbers();
+  var randomizedList = numbers.generate();
+
+  print(randomizedList);
 }
