@@ -33,6 +33,12 @@ void main(List<String> arguments) {
     exit(1);
   }
 
+  // If '--size' was specified but parsedSize is null show the help message and exit(1)
+  if (argResults[size] != null && parsedSize == null) {
+    _printHelp();
+    exit(1);
+  }
+
   // If the help arg was included, print the help message and exit(0)
   if (argResults[help]) {
     _printHelp();

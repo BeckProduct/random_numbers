@@ -31,15 +31,10 @@ void main() {
       await process.shouldExit(0);
     });
 
-    // Does args '--size five' result in a random list of size 10000
+    // Does args '--size five' result in an exit code of 1
     test('instantiate size five', () async {
       process = await TestProcess.start("dart", ["run", "bin/numbers.dart", "--size", "five"]);
-      String next;
-      do {
-        next = await process.stdout.next;
-      } while (next != "Generated (size: 10000)");
-
-      await process.shouldExit(0);
+      await process.shouldExit(1);
     });
 
     // Does args '--size -5' result in an exit code of 1
