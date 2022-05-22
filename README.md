@@ -4,23 +4,31 @@ This command-line application generates a list of `n` numbers (defaults to `10,0
 
 ## Execution
 
-The application can be run in either of the following ways:
+The command-line application can be executed by running `dart run` (from the project root) or `dart run bin/numbers.dart`.
 
-`dart run` (must be run from project root)
+> NOTE: using `dart run` to run the application will not allow the use of options or flags
 
-`dart run bin/numbers.dart` (assumes run from project root)
+### Help
 
-`dart run bin/numbers.dart --size 5` (assumes run from project root)
+Application help can be found by running: `dart run bin/numbers.dart --help`.
 
-> NOTE: using the first option to run the application will not allow the use of arguments
+```
+A command-line utility for creating a list of random numbers
 
-## CLI Arguments
+Usage: dart run bin/numbers.dart [arguments]
 
-The application takes a single argument to specify the max size of the list. If the argument is ommitted, it defaults to `10,000`
+Global flags:
+--help         Print this usage information.
 
-`dart run bin/numbers.dart --size 5`
+Global options:
+--size <int>   Specify the size of the shuffled list.
+```
 
-> NOTE: if the argument is not a positive integer the application will use the default instead.
+### Size
+
+The size option can be used by running: `dart run bin/numbers.dart --size <size>`. This option takes a positive integer as a single argument to specify the max size of the list. If the argument is ommitted, it defaults to `10000`.
+
+> NOTE: if the argument is ommitted or is not a positive integer the application will use the default (10,000) instead.
 
 ## Output
 
@@ -29,5 +37,6 @@ The application prints the results to `stdout` with no formatting. Example outpu
 ```
 ❯ dart run bin/numbers.dart --size 5
 [2, 3, 5, 1, 4]
+Generated (size: 5)
 ```
 

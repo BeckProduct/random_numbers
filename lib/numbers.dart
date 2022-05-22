@@ -7,20 +7,19 @@ class Numbers {
   // For generating a random index
   final _random = Random();
 
-  // This method creates a strongly typed list with a capacity of 10,000,
+  // This method creates a strongly typed list with a capacity of <size> and
   // shuffles the list using the Fisher-Yates shuffle algorithm. It iterates
-  // the ordered list, then swaps an element at the current index with an
+  // the ordered list swaping an element at the current index with an
   // element at a random index. Finally, it returns the randomized List.
-
   List<int> generate({int size = 10000}) {
-    // Generates an ordered list using the List.generate() constructor
+    // Generate an ordered list using the List.generate() constructor
     List<int> orderedList = List<int>.generate(size, (int index) => index + 1);
 
-    // Iterates the list in descending order
+    // Iterate the items in orderedList backwards
     for (int i = orderedList.length - 1; i > 0; i--) {
-      // Create a random index between 0 and the length of the list
+      // Create a random index between 0 and the list.length
       var randomIndex = _random.nextInt(i);
-      // Get the value at that random index
+      // Get the value in the orderedList at the random index (randomIndex)
       var randomValue = orderedList[randomIndex];
       // Place the item at the selected index (i) at the selected random index (randomIndex) in the list
       orderedList[randomIndex] = orderedList[i];

@@ -4,10 +4,11 @@ import 'package:test/test.dart';
 
 void main() {
   late Numbers numbers;
-  late TestProcess process;
 
   // Test to ensure command line args work correctly
   group('main method', () {
+    late TestProcess process;
+
     // Does no args result in a random list of size 10000
     test('instantiate no args', () async {
       process = await TestProcess.start("dart", ["run", "bin/numbers.dart"]);
@@ -57,8 +58,15 @@ void main() {
       process = await TestProcess.start("dart", ["run", "bin/numbers.dart", "--bad"]);
       await process.shouldExit(1);
     });
+
+    // Does args '--help' result in an exit code of 0
+    test('instantiate help', () async {
+      process = await TestProcess.start("dart", ["run", "bin/numbers.dart", "--help"]);
+      await process.shouldExit(0);
+    });
   });
 
+  // Test the generate method
   group('generate method', () {
     setUp(() {
       numbers = Numbers();
