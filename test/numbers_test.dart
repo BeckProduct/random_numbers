@@ -31,17 +31,6 @@ void main() {
       await process.shouldExit(0);
     });
 
-    // Does args '--size -5' result in a random list of size 10000
-    test('instantiate size -5', () async {
-      process = await TestProcess.start("dart", ["run", "bin/numbers.dart", "--size", "-5"]);
-      String next;
-      do {
-        next = await process.stdout.next;
-      } while (next != "Generated (size: 10000)");
-
-      await process.shouldExit(0);
-    });
-
     // Does args '--size five' result in a random list of size 10000
     test('instantiate size five', () async {
       process = await TestProcess.start("dart", ["run", "bin/numbers.dart", "--size", "five"]);
@@ -51,6 +40,12 @@ void main() {
       } while (next != "Generated (size: 10000)");
 
       await process.shouldExit(0);
+    });
+
+    // Does args '--size -5' result in an exit code of 1
+    test('instantiate size -5', () async {
+      process = await TestProcess.start("dart", ["run", "bin/numbers.dart", "--size", "-5"]);
+      await process.shouldExit(1);
     });
 
     // Does args '--bad' result in an exit code of 1

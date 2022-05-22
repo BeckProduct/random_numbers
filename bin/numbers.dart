@@ -20,34 +20,40 @@ void main(List<String> arguments) {
     // Parse the arguments
     argResults = parser.parse(arguments);
   } catch (e) {
-    // On exception, print the help message
-    printHelp();
+    // On exception, print the help message and exit(1)
+    _printHelp();
     exit(1);
-  }
-
-  // If the help arg was included, print the help message
-  if (argResults[help]) {
-    printHelp();
-    exit(0);
   }
 
   // Try to parse the 'size' command line arg
   int? parsedSize = int.tryParse(argResults[size]);
+  // If it's less than 1 print the help message and exit(1)
+  if (parsedSize != null && parsedSize < 1) {
+    _printHelp();
+    exit(1);
+  }
+
+  // If the help arg was included, print the help message and exit(0)
+  if (argResults[help]) {
+    _printHelp();
+    exit(0);
+  }
+
   // Call the run method to do the work
-  List<int> randomizedList = run(parsedSize);
+  List<int> randomizedList = _run(parsedSize);
   // Print the randomized list to stdout
   stdout.writeln(randomizedList);
   // Print results to stdout
   stdout.writeln('Generated (size: ${randomizedList.length})');
 }
 
-List<int> run(int? size) {
+List<int> _run(int? size) {
   // The final randomized list
   List<int> randomizedList;
 
   // Instantiate the Numbers class
   var numbers = Numbers();
-  if (size != null && size > 0) {
+  if (size != null) {
     // If the parsedSize value is a positive integer, use it
     randomizedList = numbers.generate(size: size);
   } else {
@@ -58,7 +64,7 @@ List<int> run(int? size) {
   return randomizedList;
 }
 
-void printHelp() {
+void _printHelp() {
   stdout.writeln('A command-line utility for creating a list of random numbers');
   stdout.writeln();
   stdout.writeln('Usage: dart run bin/numbers.dart [arguments]');
