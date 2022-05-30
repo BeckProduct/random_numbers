@@ -17,7 +17,7 @@ class Numbers {
 
     // Iterate the items in orderedList backwards
     for (int i = orderedList.length - 1; i > 0; i--) {
-      // Create a random index between 0 and the list.length
+      // Create a random index between 0 and the list[i]
       var randomIndex = _random.nextInt(i);
       // Get the value in the orderedList at the random index (randomIndex)
       var randomValue = orderedList[randomIndex];
